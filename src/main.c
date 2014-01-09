@@ -45,11 +45,6 @@ void get_interfaces (void)
 
 int main(void)
 {
-    LIBXML_TEST_VERSION
-    xmlInitParser( );
-    xmlKeepBlanksDefault(0);
-    //curl_global_init(CURL_GLOBAL_ALL);
-
     if ( tui_init( ))
     {
         puts("error");
@@ -58,7 +53,6 @@ int main(void)
     int32_t user_key = 0;
     wbkgd(stdscr, COLOR_PAIR(1));
     mvwprintw(stdscr,0,5,"DRBL remote console, F12 to exit");
-    //PANEL *TOP = main_window->panel;
     get_interfaces();
     active_hosts();
     cursed *but = tui_new_button(if_window->overlay,11,11,"Refresh", 7);
@@ -70,18 +64,14 @@ int main(void)
 
         default:
 
-            break;
+        break;
         }
-        //top_panel(TOP);
-        //touchwin(panel_window(TOP));
         update_panels( );
         doupdate( );
     }
     while (( user_key = getch( )) != KEY_F(12));
     tui_del_win(if_window);
-    //tui_del_win(hosts_window);
+    tui_del_win(hosts_window);
     endwin( );
-    xmlCleanupParser( );
-    //curl_global_cleanup( );
 }
 
